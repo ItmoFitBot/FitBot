@@ -13,4 +13,5 @@ public class WeatherDto {
     private Double maxTemperature;
     private Double minTemperature;
     private Double precipitation;
+    private Double windSpeed;
 }

@@ -24,7 +24,7 @@ public class WeatherFetcher {
     public WeatherDto getWeatherByCoordinates(double latitude, double longitude, LocalDate date) throws IOException, InterruptedException, WeatherAtDateNotFound, InvalidStatus {
         String formattedDate = date.format(formatter);
 
-        String url = String.format(Locale.US, "%s?latitude=%.4f&longitude=%.4f&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&start_date=%s&end_date=%s&timezone=UTC",
+        String url = String.format(Locale.US, "%s?latitude=%.4f&longitude=%.4f&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&start_date=%s&end_date=%s&timezone=UTC",
                 BASE_URL, latitude, longitude, formattedDate, formattedDate);
 
         HttpClient client = HttpClient.newHttpClient();
@@ -53,18 +53,21 @@ public class WeatherFetcher {
         JSONArray tempMax = daily.getJSONArray("temperature_2m_max");
         JSONArray tempMin = daily.getJSONArray("temperature_2m_min");
         JSONArray precipitation = daily.getJSONArray("precipitation_sum");
+        JSONArray windSpeed = daily.getJSONArray("wind_speed_10m_max");
 
         for (int i = 0; i < dates.length(); i++) {
             if (dates.getString(i).equals(date.format(formatter))) {
                 double maxTemp = tempMax.getDouble(i);
                 double minTemp = tempMin.getDouble(i);
                 double precip = precipitation.getDouble(i);
+                double wind = windSpeed.getDouble(i);
                 return WeatherDto
                         .builder()
                         .maxTemperature(maxTemp)
                         .minTemperature(minTemp)
                         .precipitation(precip)
                         .date(date)
+                        .windSpeed(wind)
                         .build();
             }
         }
