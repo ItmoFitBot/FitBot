@@ -57,4 +57,61 @@ public class TrackRecommendation {
         }
         return weights;
     }
+    // Examole how use
+    /*
+       public static void main(String[] args) {
+        // Пример данных маршрутов и отзывов
+        double[][] routes = {
+                {10.0, 500.0, 120.0, 5.0, 150.0}, //расстояние, набор высоты, время, средняя ск, ср пульс
+                {15.0, 800.0, 180.0, 4.0, 160.0},
+                {5.0, 200.0, 60.0, 6.0, 140.0}
+        };
+        double[] reviews = {7.0, 8.5, 3.5}; // соответствующие отзывы на маршруты (можем использовать среднее от сложности и усталости или общую оценку)
+
+        // Диапазоны для нормализации
+        double minDistance = 1.0;
+        double maxDistance = 20.0;
+        double minElevationGain = 0.0;
+        double maxElevationGain = 1000.0;
+        double minTime = 30.0;
+        double maxTime = 300.0;
+        double minAvgSpeed = 3.0;
+        double maxAvgSpeed = 10.0;
+        double minAvgHeartRate = 60.0;
+        double maxAvgHeartRate = 180.0;
+
+        // Нормализация данных маршрутов
+        double[][] normalizedRoutes = new double[routes.length][5];
+        for (int i = 0; i < routes.length; i++) {
+            normalizedRoutes[i][0] = normalize(routes[i][0], minDistance, maxDistance);
+            normalizedRoutes[i][1] = normalize(routes[i][1], minElevationGain, maxElevationGain);
+            normalizedRoutes[i][2] = normalize(routes[i][2], minTime, maxTime);
+            normalizedRoutes[i][3] = normalize(routes[i][3], minAvgSpeed, maxAvgSpeed);
+            normalizedRoutes[i][4] = normalize(routes[i][4], minAvgHeartRate, maxAvgHeartRate);
+        }
+
+        // Обучение весов
+        double[] weights = trainWeights(normalizedRoutes, reviews);
+        System.out.println("Trained Weights: " + Arrays.toString(weights));
+
+        // Новый маршрут для рекомендации
+        double distance = 12.0;
+        double elevationGain = 600.0;
+        double time = 150.0;
+        double avgSpeed = 5.5;
+        double avgHeartRate = 155.0;
+
+        double recommendation = calculateRecommendation(
+                distance, elevationGain, time, avgSpeed, avgHeartRate,
+                minDistance, maxDistance,
+                minElevationGain, maxElevationGain,
+                minTime, maxTime,
+                minAvgSpeed, maxAvgSpeed,
+                minAvgHeartRate, maxAvgHeartRate,
+                weights
+        );
+
+        System.out.println("Recommendation: " + recommendation);
+    }
+     */
 }
