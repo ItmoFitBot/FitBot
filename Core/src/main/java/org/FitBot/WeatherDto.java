@@ -9,10 +9,8 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class WeatherDto {
-    private Double latitude;
-    private Double longitude;
-    private Double maxTemperature;
     private LocalDate date;
+    private Double maxTemperature;
     private Double minTemperature;
     private Double precipitation;
 }
