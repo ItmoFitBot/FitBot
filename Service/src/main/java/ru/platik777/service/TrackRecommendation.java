@@ -1,4 +1,4 @@
-package ru.platik777.recomendation;
+package ru.platik777.service;
 
 import java.util.Arrays;
 
