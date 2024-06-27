@@ -10,25 +10,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 // TODO: переделать формат возврата значений под наши сервисы
 public class WeatherFetcher {
 
     private static final String BASE_URL = "https://api.open-meteo.com/v1/forecast";
 
-    public static void main(String[] args) {
-        double latitude = 37.7749;  // Замените на нужную широту
-        double longitude = -122.4194;  // Замените на нужную долготу
-        LocalDate date = LocalDate.of(2024, 6, 27);  // Замените на нужную дату
+    private final Double latitude;
+    private final Double longitude;
 
-        try {
-            String weather = getWeatherByCoordinates(latitude, longitude, date);
-            System.out.println(weather);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    @Autowired
+    public WeatherFetcher(Double latitude, Double longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
-
     public static String getWeatherByCoordinates(double latitude, double longitude, LocalDate date) throws IOException, InterruptedException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = date.format(formatter);
@@ -56,7 +54,7 @@ public class WeatherFetcher {
         }
     }
 
-    private static String parseWeatherResponse(JSONObject jsonResponse, String date) {
+    private  parseWeatherResponse(JSONObject jsonResponse, String date) {
         JSONObject daily = jsonResponse.getJSONObject("daily");
 
         JSONArray dates = daily.getJSONArray("time");
