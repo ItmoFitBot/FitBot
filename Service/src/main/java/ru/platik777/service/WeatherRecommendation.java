@@ -51,7 +51,7 @@ public class WeatherRecommendation {
         return weatherTypes;
     }
 
-    private String getEquipmentRecommendation(WeatherType weatherType) {
+    private String getEquipmentRecommendation(WeatherType weatherType) throws ExecutionControl.NotImplementedException {
         throw new ExecutionControl.NotImplementedException("Need to implement equipment recommendation for weather");
 
     }
@@ -61,7 +61,7 @@ public class WeatherRecommendation {
         }
     }
 
-    private Double getNicestCoefficient(List<WeatherType> weatherType)  {
+    private Double getNicestCoefficient(List<WeatherType> weatherType) throws ExecutionControl.NotImplementedException {
         throw new ExecutionControl.NotImplementedException("Need to implement value for weather");
     }
 }
