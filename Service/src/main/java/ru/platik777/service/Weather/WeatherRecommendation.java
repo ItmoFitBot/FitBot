@@ -1,4 +1,4 @@
-package ru.platik777.service;
+package ru.platik777.service.Weather;
 
 import org.FitBot.WeatherRecommendationDto;
 import org.FitBot.exceptions.InvalidStatus;

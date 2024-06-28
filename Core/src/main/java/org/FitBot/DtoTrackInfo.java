@@ -1,7 +1,10 @@
 package org.FitBot;
 
+import lombok.AllArgsConstructor;
+
 import java.util.ArrayList;
 
+@AllArgsConstructor
 public class DtoTrackInfo {
     private final double totalDistance;
     private final double totalTime;
@@ -14,17 +17,4 @@ public class DtoTrackInfo {
     private final long lastLatitude;
     private final long lastLongitude;
     ArrayList<TrackPoint> trackPoints = new ArrayList<>();
-
-    public DtoTrackInfo(double totalDistance, double totalTime, double totalElevationGain, long heartRate, long countMesg, long firstLatitude, long firstLongitude, long lastLatitude, long lastLongitude, ArrayList<TrackPoint> trackPoints) {
-        this.totalDistance = totalDistance;
-        this.totalTime = totalTime;
-        this.totalElevationGain = totalElevationGain;
-        this.heartRate = heartRate;
-        this.countMesg = countMesg;
-        this.firstLatitude = firstLatitude;
-        this.firstLongitude = firstLongitude;
-        this.lastLatitude = lastLatitude;
-        this.lastLongitude = lastLongitude;
-        this.trackPoints = trackPoints;
-    }
 }
