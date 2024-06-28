@@ -18,6 +18,7 @@ public class WeatherRecommendation {
 
     private final Map<WeatherType, String> equipmentRecommendationPhrase = HashMap.newHashMap(WeatherType.values().length);
 
+    @lombok.SneakyThrows
     public WeatherRecommendationDto getReccomendation(double latitude, double longitude, LocalDate date) throws WeatherAtDateNotFound, InvalidStatus, IOException, InterruptedException {
         List<WeatherType> weatherTypes = analiseWeather(fetcher.getWeatherByCoordinates(latitude, longitude,date));
         return WeatherRecommendationDto
@@ -56,9 +57,10 @@ public class WeatherRecommendation {
 
     }
     private String alertMapping(WeatherType weatherType) {
-        if ((weatherType == WeatherType.STORM || weatherType == WeatherType.BIG_TEMPERATURE_DIFFERENCE || weatherType == WeatherType.WINDY) {
+        if ((weatherType == WeatherType.STORM || weatherType == WeatherType.BIG_TEMPERATURE_DIFFERENCE || weatherType == WeatherType.WINDY)) {
             return "Лучше остаться дома. Погодные условия опасны для жизни";
         }
+        return "";
     }
 
     private Double getNicestCoefficient(List<WeatherType> weatherType) throws ExecutionControl.NotImplementedException {
