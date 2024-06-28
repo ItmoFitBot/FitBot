@@ -1,11 +1,10 @@
-package ru.platik777.service;
+package ru.platik777.service.Recomendation;
 
 import org.FitBot.WeatherDto;
 import org.FitBot.exceptions.InvalidStatus;
 import org.FitBot.exceptions.WeatherAtDateNotFound;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -22,7 +21,7 @@ public class WeatherFetcher {
     private final String BASE_URL = "https://api.open-meteo.com/v1/forecast";
 
     public WeatherDto getWeatherByCoordinates(double latitude, double longitude, LocalDate date) throws IOException, InterruptedException, WeatherAtDateNotFound, InvalidStatus {
-        String formattedDate = date.format(formatter);
+        String formattedDate = date.format(formatter); //throws WeatherAtDateNotFound, InvalidStatus, IOException, InterruptedException
 
         String url = String.format(Locale.US, "%s?latitude=%.4f&longitude=%.4f&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&start_date=%s&end_date=%s&timezone=UTC",
                 BASE_URL, latitude, longitude, formattedDate, formattedDate);

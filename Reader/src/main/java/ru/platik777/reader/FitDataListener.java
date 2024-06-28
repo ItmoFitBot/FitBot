@@ -1,11 +1,13 @@
 package ru.platik777.reader;
 
+import com.garmin.fit.DateTime;
 import com.garmin.fit.RecordMesg;
 import com.garmin.fit.RecordMesgListener;
 import org.FitBot.DtoTrackInfo;
 import org.FitBot.TrackPoint;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FitDataListener implements RecordMesgListener {
 
@@ -16,6 +18,7 @@ public class FitDataListener implements RecordMesgListener {
     private double totalElevationGain = 0.0;
     private double lastAltitude = 0.0;
     private boolean isFirstRecord = true;
+    private Date dateTime;
 
     private long heartRate = 0;
     private long countMesg = 0;
@@ -31,6 +34,10 @@ public class FitDataListener implements RecordMesgListener {
     @Override
     public void onMesg(RecordMesg mesg) {
         countMesg++;
+
+        if(isFirstRecord) {
+            dateTime = mesg.getTimestamp().getDate();
+        }
 
         // Обновление местоположения (широты и долготы)
         if (isFirstRecord && mesg.getPositionLat() != null && mesg.getPositionLong() != null) {
@@ -54,7 +61,6 @@ public class FitDataListener implements RecordMesgListener {
         if (mesg.getTimestamp() != null) {
             System.out.println('f');
             if (isFirstRecord) {
-                isFirstRecord = false;
                 tmpTime = mesg.getTimestamp().getTimestamp();
             } else {
                 totalTime += mesg.getTimestamp().getTimestamp() - tmpTime;
@@ -88,6 +94,8 @@ public class FitDataListener implements RecordMesgListener {
 
         TrackPoint trackPoint = new TrackPoint(getTotalTime(), mesg.getDistance(), mesg.getSpeed(), mesg.getAltitude(), mesg.getHeartRate(), grade);
         trackPoints.add(trackPoint);
+
+        isFirstRecord = false;
     }
 
     public double getTotalDistance() {
@@ -131,6 +139,7 @@ public class FitDataListener implements RecordMesgListener {
     }
 
     public DtoTrackInfo getTrackInfo() {
-        return new DtoTrackInfo(totalDistance, totalTime, totalElevationGain, heartRate, countMesg, firstLatitude, firstLongitude, lastLatitude, lastLongitude, trackPoints);
+        return new DtoTrackInfo(totalDistance, totalTime, totalElevationGain, heartRate, countMesg, firstLatitude, firstLongitude, lastLatitude, lastLongitude, dateTime, trackPoints);
     }
+
 }
