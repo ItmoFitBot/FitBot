@@ -1,4 +1,4 @@
-package ru.platik777.service;
+package ru.platik777.service.Recomendation;
 
 public enum WeatherType {
     HEAT,

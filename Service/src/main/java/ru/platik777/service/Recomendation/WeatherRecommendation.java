@@ -1,4 +1,4 @@
-package ru.platik777.service;
+package ru.platik777.service.Recomendation;
 
 import jdk.jshell.spi.ExecutionControl;
 import org.FitBot.WeatherDto;
@@ -8,10 +8,7 @@ import org.FitBot.exceptions.WeatherAtDateNotFound;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WeatherRecommendation {
     private final WeatherFetcher fetcher = new WeatherFetcher();
@@ -20,7 +17,7 @@ public class WeatherRecommendation {
 
     @lombok.SneakyThrows
     public WeatherRecommendationDto getReccomendation(double latitude, double longitude, LocalDate date) throws WeatherAtDateNotFound, InvalidStatus, IOException, InterruptedException {
-        List<WeatherType> weatherTypes = analiseWeather(fetcher.getWeatherByCoordinates(latitude, longitude,date));
+        List<WeatherType> weatherTypes = analiseWeather(fetcher.getWeatherByCoordinates(latitude, longitude, date));
         return WeatherRecommendationDto
                 .builder()
                 .equipmentRecommendations(weatherTypes.stream().map(this::getEquipmentRecommendation).toList())
