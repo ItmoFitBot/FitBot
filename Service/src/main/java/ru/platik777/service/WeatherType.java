@@ -5,6 +5,7 @@ public enum WeatherType {
     FREEZING,
     STORM,
     NORMAL,
+    RAINY,
     BIG_TEMPERATURE_DIFFERENCE,
-
+    WINDY,
 }
