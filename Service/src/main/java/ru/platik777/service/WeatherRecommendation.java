@@ -1,5 +1,6 @@
 package ru.platik777.service;
 
+import jdk.jshell.spi.ExecutionControl;
 import org.FitBot.WeatherDto;
 import org.FitBot.WeatherRecommendationDto;
 import org.FitBot.exceptions.InvalidStatus;
@@ -18,7 +19,13 @@ public class WeatherRecommendation {
     private final Map<WeatherType, String> equipmentRecommendationPhrase = HashMap.newHashMap(WeatherType.values().length);
 
     public WeatherRecommendationDto getReccomendation(double latitude, double longitude, LocalDate date) throws WeatherAtDateNotFound, InvalidStatus, IOException, InterruptedException {
-        fetcher.getWeatherByCoordinates(latitude, longitude,date);
+        List<WeatherType> weatherTypes = analiseWeather(fetcher.getWeatherByCoordinates(latitude, longitude,date));
+        return WeatherRecommendationDto
+                .builder()
+                .equipmentRecommendations(weatherTypes.stream().map(this::getEquipmentRecommendation).toList())
+                .weatherAlert(weatherTypes.stream().map(this::alertMapping).toString())
+                .weatherNicestCoefficient(getNicestCoefficient(weatherTypes))
+                .build();
     }
 
     private List<WeatherType> analiseWeather(WeatherDto weatherDto) {
@@ -42,5 +49,19 @@ public class WeatherRecommendation {
             weatherTypes.add(WeatherType.WINDY);
         }
         return weatherTypes;
+    }
+
+    private String getEquipmentRecommendation(WeatherType weatherType) {
+        throw new ExecutionControl.NotImplementedException("Need to implement equipment recommendation for weather");
+
+    }
+    private String alertMapping(WeatherType weatherType) {
+        if ((weatherType == WeatherType.STORM || weatherType == WeatherType.BIG_TEMPERATURE_DIFFERENCE || weatherType == WeatherType.WINDY) {
+            return "Лучше остаться дома. Погодные условия опасны для жизни";
+        }
+    }
+
+    private Double getNicestCoefficient(List<WeatherType> weatherType)  {
+        throw new ExecutionControl.NotImplementedException("Need to implement value for weather");
     }
 }
