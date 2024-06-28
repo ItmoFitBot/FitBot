@@ -1,5 +1,6 @@
 package org.FitBot;
 
+
 public class TrackPoint {
 
     public TrackPoint(double time, double distance, double speed, double elevationGain, long heartRate, double grade) {

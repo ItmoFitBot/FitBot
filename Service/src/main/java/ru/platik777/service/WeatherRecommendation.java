@@ -17,7 +17,6 @@ public class WeatherRecommendation {
     public WeatherRecommendationDto getReccomendation(double latitude, double longitude, LocalDate date) throws WeatherAtDateNotFound, InvalidStatus, IOException, InterruptedException {
         fetcher.getWeatherByCoordinates(latitude, longitude,date);
 
-
     }
 
     private WeatherRecommendationDto analiseWeather() {

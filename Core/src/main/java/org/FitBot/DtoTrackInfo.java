@@ -2,6 +2,7 @@ package org.FitBot;
 
 import java.util.ArrayList;
 
+
 public class DtoTrackInfo {
     private final double totalDistance;
     private final double totalTime;
