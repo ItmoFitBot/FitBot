@@ -1,6 +1,5 @@
 package ru.platik777.reader;
 
-import com.garmin.fit.DateTime;
 import com.garmin.fit.RecordMesg;
 import com.garmin.fit.RecordMesgListener;
 import org.FitBot.DtoTrackInfo;
@@ -41,18 +40,17 @@ public class FitDataListener implements RecordMesgListener {
 
         // Обновление местоположения (широты и долготы)
         if (isFirstRecord && mesg.getPositionLat() != null && mesg.getPositionLong() != null) {
-            Long firstLatitude = (long) (mesg.getPositionLat() * (180.0 / Math.pow(2, 31)));
-            Long firstLongitude = (long) (mesg.getPositionLong() * (180.0 / Math.pow(2, 31)));
+            firstLatitude = (long) (mesg.getPositionLat() * (180.0 / Math.pow(2, 31)));
+            firstLongitude = (long) (mesg.getPositionLong() * (180.0 / Math.pow(2, 31)));
         }
         if (mesg.getPositionLat() != null && mesg.getPositionLong() != null) {
-            Long lastLatitude = (long) (mesg.getPositionLat() * (180.0 / Math.pow(2, 31)));
-            Long lastLongitude = (long) (mesg.getPositionLong() * (180.0 / Math.pow(2, 31)));
+            lastLatitude = (long) (mesg.getPositionLat() * (180.0 / Math.pow(2, 31)));
+            lastLongitude = (long) (mesg.getPositionLong() * (180.0 / Math.pow(2, 31)));
         }
 
         if(mesg.getHeartRate() != null) {
-            heartRate += mesg.getHeartRate();
+            heartRate += mesg.getHeartRate().shortValue();
         }
-
 
         if (mesg.getDistance() != null) {
             lastDistance = totalDistance;
@@ -84,7 +82,6 @@ public class FitDataListener implements RecordMesgListener {
             // Вычисление изменения высоты и расстояния
             double deltaAltitude = currentAltitude - lastAltitude;
             double deltaDistance = totalDistance - lastDistance; // или totalDistance между текущим и предыдущим RecordMesg
-
 
             if (!isFirstRecord) {
                 // grade теперь содержит угол подъема или спуска в процентах
@@ -121,7 +118,6 @@ public class FitDataListener implements RecordMesgListener {
         return totalDistance / totalTime;
     }
 
-
     public long getFirstLatitude() {
         return firstLatitude;
     }
@@ -139,7 +135,18 @@ public class FitDataListener implements RecordMesgListener {
     }
 
     public DtoTrackInfo getTrackInfo() {
-        return new DtoTrackInfo(totalDistance, totalTime, totalElevationGain, heartRate, countMesg, firstLatitude, firstLongitude, lastLatitude, lastLongitude, dateTime, trackPoints);
+        return DtoTrackInfo.builder()
+                .totalDistance(totalDistance)
+                .totalTime(totalTime)
+                .totalElevationGain(totalElevationGain)
+                .heartRate(getHeartRate())
+                .countMesg(countMesg)
+                .firstLatitude(firstLatitude)
+                .firstLongitude(firstLongitude)
+                .lastLatitude(lastLatitude)
+                .lastLongitude(lastLongitude)
+                .date(dateTime)
+                .trackPoints(trackPoints)
+                .build();
     }
-
 }

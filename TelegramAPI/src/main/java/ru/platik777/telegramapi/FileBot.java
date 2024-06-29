@@ -1,5 +1,6 @@
 package ru.platik777.telegramapi;
 
+import org.FitBot.DtoTrackInfo;
 import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -10,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import ru.platik777.reader.FitFileReader;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -57,6 +59,19 @@ public class FileBot extends TelegramLongPollingBot {
             }
 
             // TODO: добавить вызов Reader и сохранение данных в бд
+            FitFileReader fitFileReader = new FitFileReader();
+            DtoTrackInfo trackInfo = fitFileReader.read(filePath.toString());
+
+            // Выводим прочитанные данные на консоль
+            System.out.println("Прочитанные данные:");
+            System.out.println("Общее расстояние: " + trackInfo.getTotalDistance());
+            System.out.println("Общее время: " + trackInfo.getTotalTime());
+                System.out.println("Общий подъем: " + trackInfo.getTotalElevationGain());
+                System.out.println("Средний пульс: " + trackInfo.getHeartRate());
+                System.out.println("Первая широта: " + trackInfo.getFirstLatitude());
+                System.out.println("Первая долгота: " + trackInfo.getFirstLongitude());
+                System.out.println("Последняя широта: " + trackInfo.getLastLatitude());
+                System.out.println("Последняя долгота: " + trackInfo.getLastLongitude());
             Files.delete(filePath);
 
             // Send a message with options
