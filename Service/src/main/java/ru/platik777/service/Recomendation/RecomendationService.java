@@ -1,7 +1,6 @@
 package ru.platik777.service.Recomendation;
 
 import org.FitBot.DtoTrackInfo;
-import org.FitBot.DtoTrackInfoWithReview;
 import org.FitBot.WeatherRecommendationDto;
 import org.FitBot.exceptions.InvalidStatus;
 import org.FitBot.exceptions.WeatherAtDateNotFound;

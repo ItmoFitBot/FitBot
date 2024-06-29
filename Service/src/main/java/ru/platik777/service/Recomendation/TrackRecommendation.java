@@ -1,7 +1,6 @@
 package ru.platik777.service.Recomendation;
 
 import org.FitBot.DtoTrackInfo;
-import org.FitBot.DtoTrackInfoWithReview;
 
 import java.util.ArrayList;
 import java.util.Arrays;

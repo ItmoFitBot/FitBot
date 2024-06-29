@@ -1,6 +1,7 @@
 package ru.platik777.service.services;
 
 import org.FitBot.DTO.TrackDTO;
+import org.FitBot.DtoTrackInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.FitBot.entities.Track;
@@ -28,7 +29,7 @@ public class TrackService {
                 .map(this::convertToDTO);
     }
 
-    public TrackDTO saveTrack(TrackDTO trackDto) {
+    public TrackDTO saveTrack(DtoTrackInfo trackDto) {
         Track track = convertToEntity(trackDto);
         Track savedTrack = trackRepository.save(track);
         return convertToDTO(savedTrack);
