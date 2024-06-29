@@ -92,7 +92,8 @@ public class FitDataListener implements RecordMesgListener {
             }
         }
 
-        TrackPoint trackPoint = new TrackPoint(getTotalTime(), mesg.getDistance(), mesg.getSpeed(), mesg.getAltitude(), mesg.getHeartRate(), grade);
+
+        TrackPoint trackPoint = new TrackPoint(getTotalTime(), mesg.getDistance(), mesg.getSpeed(), mesg.getAltitude(), mesg.getHeartRate(), grade, mesg.getPositionLat(), mesg.getPositionLong());
         trackPoints.add(trackPoint);
 
         isFirstRecord = false;

@@ -16,6 +16,9 @@ public class TrackMarkService {
     @Autowired
     private  TrackMarkRepository trackMarkRepository;
 
+    public TrackMark getTrackMarkByTrackId(int id) {
+        return trackMarkRepository.findByTrackId(String.valueOf((long) id)).orElse(null);
+    }
     public List<TrackMarkDTO> getTrackMarks() {
         return trackMarkRepository.findAll().stream()
                 .map(this::convertToDTO)
@@ -39,7 +42,7 @@ public class TrackMarkService {
 
     private TrackMarkDTO convertToDTO(TrackMark trackMark) {
         TrackMarkDTO trackMarkDto = new TrackMarkDTO();
-        trackMarkDto.setId(trackMark.getId());
+        //trackMarkDto.setId(trackMark.getId());
         trackMarkDto.setUserId(trackMark.getUser().getId());
         trackMarkDto.setTrackId(trackMark.getTrack().getId());
         trackMarkDto.setDate(trackMark.getDate());
@@ -53,7 +56,7 @@ public class TrackMarkService {
 
     private TrackMark convertToEntity(TrackMarkDTO trackMarkDto) {
         TrackMark trackMark = new TrackMark();
-        trackMark.setId(trackMarkDto.getId());
+        //trackMark.setId(trackMarkDto.getId());
         trackMark.setDate(trackMarkDto.getDate());
         trackMark.setGeneralDifficult(trackMarkDto.getGeneralDifficult());
         trackMark.setPhysicalLoad(trackMarkDto.getPhysicalLoad());

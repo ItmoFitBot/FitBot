@@ -40,7 +40,7 @@ public class TrackPointService {
 
     private TrackPointDTO convertToDTO(TrackPoint trackPoint) {
         TrackPointDTO trackPointDto = new TrackPointDTO();
-        trackPointDto.setId(trackPoint.getId());
+        //trackPointDto.setId(trackPoint.getId());
         trackPointDto.setTrackId(trackPoint.getTrack().getId());
         trackPointDto.setLatitude(trackPoint.getLatitude());
         trackPointDto.setLongitude(trackPoint.getLongitude());
@@ -51,7 +51,7 @@ public class TrackPointService {
 
     private TrackPoint convertToEntity(TrackPointDTO trackPointDto) {
         TrackPoint trackPoint = new TrackPoint();
-        trackPoint.setId(trackPointDto.getId());
+        //trackPoint.setId(trackPointDto.getId());
         trackPoint.setLatitude(trackPointDto.getLatitude());
         trackPoint.setLongitude(trackPointDto.getLongitude());
         trackPoint.setDateTime(trackPointDto.getDateTime());

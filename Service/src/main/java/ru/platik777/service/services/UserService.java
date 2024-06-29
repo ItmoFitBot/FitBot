@@ -1,5 +1,6 @@
 package ru.platik777.service.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.FitBot.DTO.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,12 @@ public class UserService {
                 .map(this::convertToDTO);
     }
 
+    public int getIdByName(String name) throws EntityNotFoundException {
+        if (userRepository.findByUsername(name).isPresent())
+            return Math.toIntExact(userRepository.findByUsername(name).get().getId());
+        throw new EntityNotFoundException("User with name " + name + " not found");
+    }
+
     public UserDTO saveUser(UserDTO userDto) {
         User user = convertToEntity(userDto);
         User savedUser = userRepository.save(user);
@@ -39,14 +46,14 @@ public class UserService {
 
     private UserDTO convertToDTO(User user) {
         UserDTO userDto = new UserDTO();
-        userDto.setId(user.getId());
+        //userDto.setId(user.getId());
         userDto.setName(user.getName());
         return userDto;
     }
 
     private User convertToEntity(UserDTO userDto) {
         User user = new User();
-        user.setId(userDto.getId());
+        //user.setId(userDto.getId());
         user.setName(userDto.getName());
         return user;
     }

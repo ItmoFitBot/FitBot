@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 public class DtoGeneralCharect {
 
-    public DtoGeneralCharect(double time, double distance, double height) {
+    public DtoGeneralCharect(double time, double distance, double heartRate) {
         this.time = time;
         this.distance = distance;
-        this.height = height;
+        this.heartRate = heartRate;
     }
 
     private double distance;
     private double time;
-    private double height;
+    private double heartRate;
 }

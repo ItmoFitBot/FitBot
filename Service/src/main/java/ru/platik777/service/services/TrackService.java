@@ -38,6 +38,11 @@ public class TrackService {
         trackRepository.deleteById(id);
     }
 
+    public Track findByAverageHeartRateAndAndAverageSpeedAndTrackDistance(int distance, int speed, int heartRate) {
+        Optional<Track> trackOptional = trackRepository.findByAverageHeartRateAndAndAverageSpeedAndTrackDistance(heartRate, speed, distance);
+        return trackOptional.orElse(null);
+    }
+
     private TrackDTO convertToDTO(Track track) {
         TrackDTO trackDto = new TrackDTO();
         trackDto.setId(track.getId());
@@ -49,7 +54,7 @@ public class TrackService {
 
     private Track convertToEntity(TrackDTO trackDto) {
         Track track = new Track();
-        track.setId(trackDto.getId());
+        //track.setId(trackDto.getId());
         track.setAverageSpeed(trackDto.getAverageSpeed());
         track.setAverageHeartRate(trackDto.getAverageHeartRate());
         track.setTrackDistance(trackDto.getTrackDistance());
