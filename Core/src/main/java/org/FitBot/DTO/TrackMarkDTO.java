@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class TrackMarkDTO {
-    private Long id;
+    //private Long id;
     private Long userId;
     private Long trackId;
     private Date date;

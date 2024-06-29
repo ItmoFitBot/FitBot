@@ -44,7 +44,7 @@ public class UserTrackRouteService {
 
     private UserTrackRouteDTO convertToDTO(UserTrackRoute userTrackRoute) {
         UserTrackRouteDTO userTrackRouteDto = new UserTrackRouteDTO();
-        userTrackRouteDto.setId(userTrackRoute.getId());
+        //userTrackRouteDto.setId(userTrackRoute.getId());
         userTrackRouteDto.setUserId(userTrackRoute.getUser().getId());
         userTrackRouteDto.setTrackId(userTrackRoute.getTrack().getId());
         return userTrackRouteDto;
@@ -52,7 +52,7 @@ public class UserTrackRouteService {
 
     private UserTrackRoute convertToEntity(UserTrackRouteDTO userTrackRouteDto) {
         UserTrackRoute userTrackRoute = new UserTrackRoute();
-        userTrackRoute.setId(userTrackRouteDto.getId());
+        //userTrackRoute.setId(userTrackRouteDto.getId());
         // Note: You'll need to fetch or create a User and Track entity for the following lines
         // userTrackRoute.setUser(user);
         // userTrackRoute.setTrack(track);

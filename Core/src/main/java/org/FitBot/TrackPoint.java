@@ -1,15 +1,19 @@
 package org.FitBot;
 
+import lombok.Getter;
 
+@Getter
 public class TrackPoint {
 
-    public TrackPoint(double time, double distance, double speed, double elevationGain, long heartRate, double grade) {
+    public TrackPoint(double time, double distance, double speed, double elevationGain, long heartRate, double grade, double lat, double lon) {
         this.time = time;
         this.distance = distance;
         this.speed = speed;
         this.elevationGain = elevationGain;
         this.heartRate = heartRate;
         this.grade = grade;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     private final double distance;
@@ -18,28 +22,7 @@ public class TrackPoint {
     private final double elevationGain;
     private final long heartRate;
     private final double grade;
+    private final double lat;
+    private final double lon;
 
-    public double getDistance() {
-        return distance;
-    }
-
-    public double getTime() {
-        return time;
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public double getElevationGain() {
-        return elevationGain;
-    }
-
-    public long getHeartRate() {
-        return heartRate;
-    }
-
-    public double getGrade() {
-        return grade;
-    }
 }

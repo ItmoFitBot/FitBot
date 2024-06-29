@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class TrackPointDTO {
-    private Long id;
+    //private Long id;
     private Long trackId;
     private String latitude;
     private String longitude;
